@@ -1,0 +1,6 @@
+<Mod
+	name="Array formations"
+	description="Adds 'formation' spells for casting patterns like 'E' and 'C'"
+	request_no_api_restrictions="1" 
+> 
+</Mod>
