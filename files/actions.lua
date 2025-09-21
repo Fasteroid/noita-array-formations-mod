@@ -1,7 +1,6 @@
 function array_cast(size) 
 	draw_actions(size, true)
 	add_projectile("mods/array_formations/files/array.xml")
-	c.spread_degrees = c.spread_degrees - 12.0
 end
 
 table.insert( actions,
@@ -13,10 +12,11 @@ table.insert( actions,
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "0,1,2,3,4,5,6", -- BURST_2
 	spawn_probability  = "0.6,0.7,0.8,0.8,0.8,0.8,0.8", -- BURST_2
-	price = 160,
-	mana = 2,
+	price = 180,
+	mana = 6,
 	--max_uses = 100,
 	action = function()
+		c.spread_degrees = c.spread_degrees - 6.0
 		array_cast(2)
 	end,
 } )
@@ -30,10 +30,11 @@ table.insert( actions,
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "2,3,4,5,6", -- BURST_4
 	spawn_probability  = "0.4,0.5,0.6,0.6,0.6", -- BURST_4
-	price = 200,
-	mana = 8,
+	price = 220,
+	mana = 12,
 	--max_uses = 100,
 	action = function()
+		c.spread_degrees = c.spread_degrees - 12.0
 		array_cast(4)
 	end,
 } )
@@ -48,10 +49,11 @@ table.insert( actions,
 	type 			    = ACTION_TYPE_DRAW_MANY,
 	spawn_level         = "5,6,10", -- BURST_8
 	spawn_probability   = "0.1,0.1,0.5", -- BURST_8
-	price = 320,
-	mana = 40,
+	price = 400,
+	mana = 48,
 	--max_uses = 100,
 	action = function()
+		c.spread_degrees = c.spread_degrees - 24.0
 		array_cast(8)
 	end,
 } )

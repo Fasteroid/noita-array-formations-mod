@@ -63,7 +63,7 @@ function main()
 
     print(#projectiles_we_want .. " projectiles found")
         
-    local stepSize = 4
+    local stepSize = 3
     local offset   = -(#projectiles_we_want - 0.5) * stepSize / 2
 
     for i=1, #projectiles_we_want do
