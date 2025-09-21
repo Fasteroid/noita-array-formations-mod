@@ -3,45 +3,80 @@
 dofile_once("data/scripts/lib/utilities.lua")
 dofile_once("data/scripts/gun/gun.lua")
 
-local entity_id = GetUpdatedEntityID()
-local pos_x, pos_y, rot = EntityGetTransform( entity_id )
+local ARRAY_TAG = "array_shot_member"
 
--- velocity
-local vel_x,vel_y = GameGetVelocityCompVelocity(entity_id)
-vel_x, vel_y = vec_normalize(vel_x, vel_y)
-if vel_x == nil then return end
+function main()
 
+    local entity_id    = GetUpdatedEntityID()
+    local pos_x, pos_y = EntityGetTransform( entity_id )
 
-local offset_x, offset_y = vec_normalize(vel_x, vel_y)
-offset_x, offset_y = vec_rotate(offset_x, offset_y, math.pi*0.5) -- perpendicular to flight direction
+    local master_owner = nil
+    local all_possible_projectiles = EntityGetInRadius( pos_x, pos_y, 20 )
 
--- enable and launch up to 5 parallel projectiles
-local beams = EntityGetInRadiusWithTag( pos_x, pos_y, 5, "array_slave" )
+    for i=1, #all_possible_projectiles do
+        local victim = all_possible_projectiles[i]
 
-if( beams ~= nil ) then
-    
+        if EntityHasTag(victim, ARRAY_TAG) then goto continue_1 end
+
+        local victim_comp = EntityGetFirstComponent( victim, "ProjectileComponent" )
+        if( victim_comp == nil ) then goto continue_1 end
+
+        local victim_owner = ComponentGetValue2( victim_comp, "mWhoShot" )
+        if( victim_owner == nil or victim_owner == NULL_ENTITY ) then goto continue_1 end
+
+        master_owner = victim_owner
+        print("found the owner!", master_owner)
+        if true then break end
+
+        ::continue_1::
+    end
+
+    local offset_x, offset_y = nil, nil
+    local projectiles_we_want = {};
+
+    for i=1, #all_possible_projectiles do
+        local victim = all_possible_projectiles[i]
+
+        local victim_comp = EntityGetFirstComponent( victim, "ProjectileComponent" )
+        if not victim_comp then goto continue_2 end
+
+        local victim_owner = ComponentGetValue2( victim_comp, "mWhoShot" )
+        if victim_owner ~= master_owner then goto continue_2 end
+
+        if EntityHasTag(victim, ARRAY_TAG) then goto continue_2 end
+        EntityAddTag(victim, ARRAY_TAG)
+
+        if( offset_x == nil ) then
+            -- velocity
+            local vel_x,vel_y = GameGetVelocityCompVelocity(victim)
+            if vel_x == nil then goto continue_2 end
+            vel_x, vel_y = vec_normalize(vel_x, vel_y)
+            offset_x, offset_y = vec_rotate(vel_x, vel_y, math.pi*0.5) -- perpendicular to flight direction
+            print("got offset", offset_x, offset_y)
+        end
+
+        table.insert(projectiles_we_want, victim)
+        ::continue_2::
+    end
+
+    if( #projectiles_we_want == 0 ) then return end
+
+    print(#projectiles_we_want .. " projectiles found")
+        
     local stepSize = 4
-    local width    = #beams * 2
-    local offset   = -width / 2 - #beams / 4
+    local offset   = -(#projectiles_we_want - 0.5) * stepSize / 2
 
-	for i=1, #beams do
-		local beam = beams[i]
+    for i=1, #projectiles_we_want do
+        local victim = projectiles_we_want[i]
 
-    	-- enable all components
-		local temp_all_components = EntityGetAllComponents(beam)
-		if( temp_all_components ~= nil ) then
-			for _,comp in pairs(temp_all_components) do
-				EntitySetComponentIsEnabled(beam,comp,true)
-			end
-		end
+        -- placement
+        local x = pos_x + offset_x * offset
+        local y = pos_y + offset_y * offset
+        EntitySetTransform(victim, x, y, rot)
 
-		-- placement
-		local x = pos_x + offset_x * offset
-		local y = pos_y + offset_y * offset
-		EntitySetTransform(beam, x, y, rot)
-        EntityRemoveTag(beam, "array_slave")
-
-		offset = offset + stepSize
-	end
+        offset = offset + stepSize
+    end
 
 end
+
+main()

@@ -1,8 +1,5 @@
 function array_cast(size) 
-	for i=1, size do
-		if #deck <= 0 then break end
-		add_projectile_trigger_timer("mods/array_formations/files/array_slave.xml", 1, 1)
-	end
+	draw_actions(size, true)
 	add_projectile("mods/array_formations/files/array.xml")
 	c.spread_degrees = c.spread_degrees - 12.0
 end
