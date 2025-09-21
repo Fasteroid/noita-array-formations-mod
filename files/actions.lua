@@ -11,7 +11,7 @@ table.insert( actions,
     sprite             = "mods/array_formations/files/array_2.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "0,1,2,3,4,5,6", -- BURST_2
-	spawn_probability  = "0.6,0.7,0.8,0.8,0.8,0.8,0.8", -- BURST_2
+	spawn_probability  = "0.5,0.6,0.7,0.7,0.7,0.7,0.7", -- BURST_2
 	price = 180,
 	mana = 6,
 	--max_uses = 100,
