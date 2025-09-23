@@ -69,6 +69,8 @@ function main()
     if( #projectiles_we_want == 0 ) then return end
 
     print(#projectiles_we_want .. " projectiles found")
+
+    table.sort(projectiles_we_want)
         
     local stepSize = 3
     local offset   = -(#projectiles_we_want - 0.5) * stepSize / 2
