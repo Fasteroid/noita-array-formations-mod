@@ -1,6 +1,6 @@
 function array_cast(size) 
 	draw_actions(size, true)
-	add_projectile("mods/array_formations/files/array.xml")
+	if not reflecting then add_projectile("mods/array_formations/files/array.xml") end
 end
 
 table.insert( actions,
