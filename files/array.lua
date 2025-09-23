@@ -7,6 +7,8 @@ local ARRAY_TAG = "array_shot_member"
 
 function main()
 
+    print("spawned an array formation")
+
     local entity_id    = GetUpdatedEntityID()
     local pos_x, pos_y = EntityGetTransform( entity_id )
 
@@ -15,6 +17,11 @@ function main()
 
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
+
+        local arc_test = EntityGetFirstComponent( victim, "ArcComponent" )
+        if( arc_test ) then 
+            print("found arc component") 
+        end
 
         if EntityHasTag(victim, ARRAY_TAG) then goto continue_1 end
 

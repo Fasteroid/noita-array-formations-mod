@@ -1,6 +1,9 @@
 <Entity>
 
-	<LifetimeComponent lifetime="3" ></LifetimeComponent>
+	<ProjectileComponent>
+	</ProjectileComponent>
+
+	<LifetimeComponent lifetime="0" ></LifetimeComponent>
   
 	<LuaComponent
 		script_source_file="mods/array_formations/files/array.lua"
