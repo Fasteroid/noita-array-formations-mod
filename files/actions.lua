@@ -11,7 +11,7 @@ table.insert( actions,
     sprite             = "mods/array_formations/files/array_2.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "1,2,3,4,5,6",             -- BURST_3
-	spawn_probability  = "0.5,0.6,0.7,0.7,0.7,0.7", -- BURST_3
+	spawn_probability  = "0.6,0.7,0.8,0.8,0.8,0.8", -- BURST_3
 	price = 180,
 	mana = 6,
 	--max_uses = 100,
@@ -29,7 +29,7 @@ table.insert( actions,
     sprite             = "mods/array_formations/files/array_3.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "2,3,4,5,6",           -- BURST_4
-	spawn_probability  = "0.3,0.4,0.6,0.6,0.6", -- BURST_4
+	spawn_probability  = "0.6,0.7,0.8,0.8,0.8", -- BURST_4
 	price = 220,
 	mana = 9,
 	--max_uses = 100,
@@ -47,7 +47,7 @@ table.insert( actions,
     sprite             = "mods/array_formations/files/array_4.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
 	spawn_level        = "3,4,5,6",         -- BURST_5?
-	spawn_probability  = "0.3,0.4,0.5,0.5", -- BURST_5?
+	spawn_probability  = "0.6,0.8,0.8,0.8", -- BURST_5?
 	price = 220,
 	mana = 12,
 	--max_uses = 100,
