@@ -9,19 +9,14 @@ function main()
 
     print("spawned an array formation")
 
-    local entity_id    = GetUpdatedEntityID()
-    local pos_x, pos_y = EntityGetTransform( entity_id )
+    local self    = GetUpdatedEntityID()
+    local self_x, self_y = EntityGetTransform( self )
 
     local master_owner = nil
-    local all_possible_projectiles = EntityGetInRadius( pos_x, pos_y, 20 )
+    local all_possible_projectiles = EntityGetInRadius( self_x, self_y, 2 )
 
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
-
-        local arc_test = EntityGetFirstComponent( victim, "ArcComponent" )
-        if( arc_test ) then 
-            print("found arc component") 
-        end
 
         if EntityHasTag(victim, ARRAY_TAG) then goto continue_1 end
 
@@ -32,7 +27,6 @@ function main()
         if( victim_owner == nil or victim_owner == NULL_ENTITY ) then goto continue_1 end
 
         master_owner = victim_owner
-        print("found the owner!", master_owner)
         if true then break end
 
         ::continue_1::
@@ -68,8 +62,6 @@ function main()
 
     if( #projectiles_we_want == 0 ) then return end
 
-    print(#projectiles_we_want .. " projectiles found")
-
     table.sort(projectiles_we_want)
         
     local stepSize = 3
@@ -79,12 +71,21 @@ function main()
         local victim = projectiles_we_want[i]
 
         -- placement
-        local x = pos_x + offset_x * offset
-        local y = pos_y + offset_y * offset
+        local x = self_x + offset_x * offset
+        local y = self_y + offset_y * offset
         EntitySetTransform(victim, x, y, rot)
 
         offset = offset + stepSize
     end
+
+    local all_self_components = EntityGetAllComponents(self)
+
+    -- prevent side effects from our helper entity.  this will fail some assertions.  too bad!
+    for i=1, #all_self_components do
+        EntityRemoveComponent(self, all_self_components[i])
+    end
+
+    EntityKill(self)
 
 end
 
