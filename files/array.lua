@@ -13,7 +13,7 @@ function main()
     local self_x, self_y = EntityGetTransform( self )
 
     local master_owner = nil
-    local all_possible_projectiles = EntityGetInRadius( self_x, self_y, 2 )
+    local all_possible_projectiles = EntityGetInRadius( self_x, self_y, 100 )
 
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
@@ -77,16 +77,7 @@ function main()
 
         offset = offset + stepSize
     end
-
-    local all_self_components = EntityGetAllComponents(self)
-
-    -- prevent side effects from our helper entity.  this will fail some assertions.  too bad!
-    for i=1, #all_self_components do
-        EntityRemoveComponent(self, all_self_components[i])
-    end
-
-    EntityKill(self)
-
+    
 end
 
 main()
