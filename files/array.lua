@@ -73,7 +73,7 @@ function main()
         -- placement
         local x = self_x + offset_x * offset
         local y = self_y + offset_y * offset
-        EntitySetTransform(victim, x, y, rot)
+        EntityApplyTransform(victim, x, y, rot)
 
         offset = offset + stepSize
     end
