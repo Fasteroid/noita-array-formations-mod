@@ -3,17 +3,17 @@
 dofile_once("data/scripts/lib/utilities.lua")
 dofile_once("data/scripts/gun/gun.lua")
 
-local ARRAY_TAG = "array_shot_member"
+local ARRAY_TAG   = "array_shot_member"
+local FIND_RADIUS = 3
+local SPACING     = 3
 
 function main()
-
-    print("spawned an array formation")
 
     local self    = GetUpdatedEntityID()
     local self_x, self_y = EntityGetTransform( self )
 
     local master_owner = nil
-    local all_possible_projectiles = EntityGetInRadius( self_x, self_y, 100 )
+    local all_possible_projectiles = EntityGetInRadius( self_x, self_y, FIND_RADIUS )
 
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
@@ -64,8 +64,7 @@ function main()
 
     table.sort(projectiles_we_want)
         
-    local stepSize = 3
-    local offset   = -(#projectiles_we_want - 0.5) * stepSize / 2
+    local offset   = -(#projectiles_we_want - 0.5) * SPACING / 2
 
     for i=1, #projectiles_we_want do
         local victim = projectiles_we_want[i]
@@ -75,7 +74,7 @@ function main()
         local y = self_y + offset_y * offset
         EntityApplyTransform(victim, x, y, rot)
 
-        offset = offset + stepSize
+        offset = offset + SPACING
     end
     
 end
