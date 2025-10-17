@@ -18,8 +18,6 @@ function main()
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
 
-        print( EntityGetName(victim) )
-
         if EntityHasTag(victim, ARRAY_MEMBER_TAG) then goto continue_1 end
 
         local victim_comp = EntityGetFirstComponent( victim, "ProjectileComponent" )
