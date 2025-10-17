@@ -2,15 +2,15 @@
 
 dofile_once("data/scripts/lib/utilities.lua")
 dofile_once("data/scripts/gun/gun.lua")
-
-local ARRAY_TAG   = "array_shot_member"
-local FIND_RADIUS = 3
-local SPACING     = 3
+dofile_once("mods/array_formations/files/constants.lua")
 
 function main()
 
     local self    = GetUpdatedEntityID()
     local self_x, self_y = EntityGetTransform( self )
+
+    EntityAddTag(self, ARRAY_HELPER_TAG)
+    EntityAddTag(self, ARRAY_MEMBER_TAG)
 
     local master_owner = nil
     local all_possible_projectiles = EntityGetInRadius( self_x, self_y, FIND_RADIUS )
@@ -18,7 +18,9 @@ function main()
     for i=1, #all_possible_projectiles do
         local victim = all_possible_projectiles[i]
 
-        if EntityHasTag(victim, ARRAY_TAG) then goto continue_1 end
+        print( EntityGetName(victim) )
+
+        if EntityHasTag(victim, ARRAY_MEMBER_TAG) then goto continue_1 end
 
         local victim_comp = EntityGetFirstComponent( victim, "ProjectileComponent" )
         if( victim_comp == nil ) then goto continue_1 end
@@ -44,8 +46,8 @@ function main()
         local victim_owner = ComponentGetValue2( victim_comp, "mWhoShot" )
         if victim_owner ~= master_owner then goto continue_2 end
 
-        if EntityHasTag(victim, ARRAY_TAG) then goto continue_2 end
-        EntityAddTag(victim, ARRAY_TAG)
+        if EntityHasTag(victim, ARRAY_MEMBER_TAG) then goto continue_2 end
+        EntityAddTag(victim, ARRAY_MEMBER_TAG)
 
         if( offset_x == nil ) then
             -- velocity
@@ -72,7 +74,7 @@ function main()
         -- placement
         local x = self_x + offset_x * offset
         local y = self_y + offset_y * offset
-        EntityApplyTransform(victim, x, y, rot)
+        EntitySetTransform(victim, x, y, rot)
 
         offset = offset + SPACING
     end

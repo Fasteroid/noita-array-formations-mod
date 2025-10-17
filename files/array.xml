@@ -3,7 +3,7 @@
 	<ProjectileComponent>
 	</ProjectileComponent>
 
-	<LifetimeComponent lifetime="2" ></LifetimeComponent>
+	<LifetimeComponent lifetime="2"></LifetimeComponent>
   
 	<LuaComponent
 		script_source_file="mods/array_formations/files/array.lua"
@@ -22,7 +22,7 @@
 
 	<LuaComponent
 		script_source_file="mods/array_formations/files/array_kill.lua"
-		execute_every_n_frame="2"
+		execute_every_n_frame="1"
 		remove_after_executed="1"
 		>
 	</LuaComponent>

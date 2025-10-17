@@ -3,9 +3,6 @@
 -- all functions below are optional and can be left out
 
 --[[
-function OnModPreInit()
-	print("Mod - OnModPreInit()") -- First this is called for all mods
-end
 
 function OnModPostInit()
 	print("Mod - OnModPostInit()") -- Then this is called for all mods
@@ -28,6 +25,21 @@ function OnMagicNumbersAndWorldSeedInitialized() -- this is the last point where
 	print( "===================================== random " .. tostring(x) )
 end
 ]]--
+
+dofile_once( "mods/array_formations/files/constants.lua" )
+
+function OnModPreInit()
+	
+	-- this is a hack to prevent orbit projectiles from spawning on the array helpers
+	do
+		local orbit = ModTextFileGetContent("data/scripts/projectiles/orbit_projectile.lua")
+		orbit = "if EntityHasTag( GetUpdatedEntityID(), '"..ARRAY_HELPER_TAG.."' ) then goto DONT_EXECUTE_LOL end\n" ..
+		orbit ..
+		"\n::DONT_EXECUTE_LOL::\n"
+		ModTextFileSetContent("data/scripts/projectiles/orbit_projectile.lua", orbit)
+	end
+
+end
 
 function OnModInit()
   local translations = ModTextFileGetContent("data/translations/common.csv")
