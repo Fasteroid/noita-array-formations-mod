@@ -1,6 +1,6 @@
 <Mod
-    name="Lane Formations"
-    description="Multicast formations for casting spells in parallel lanes (of doom)"
+    name="Parallel Formations"
+    description="Multicast formations for casting spells parallel to each other"
     tags="spells"
     dont_upload_files="array_formations.code-workspace"
     >
