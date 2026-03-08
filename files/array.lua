@@ -53,7 +53,6 @@ function main()
             if vel_x == nil then goto continue_2 end
             vel_x, vel_y = vec_normalize(vel_x, vel_y)
             offset_x, offset_y = vec_rotate(vel_x, vel_y, math.pi*0.5) -- perpendicular to flight direction
-            print("got offset", offset_x, offset_y)
         end
 
         table.insert(projectiles_we_want, victim)
