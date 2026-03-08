@@ -10,8 +10,8 @@ table.insert( actions,
     description        = "$actiondesc_array_2",
     sprite             = "mods/array_formations/files/array_2.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
-	spawn_level        = "1,2,3,4,5,6",             -- BURST_3
-	spawn_probability  = "0.6,0.7,0.8,0.8,0.8,0.8", -- BURST_3
+	spawn_level        = "1,2,3,4,5,6",              
+	spawn_probability  = "0.5,0.7,0.7,0.6,0.6,0.5",
 	price = 180,
 	mana = 6,
 	--max_uses = 100,
@@ -28,8 +28,8 @@ table.insert( actions,
     description        = "$actiondesc_array_3",
     sprite             = "mods/array_formations/files/array_3.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
-	spawn_level        = "2,3,4,5,6",           -- BURST_4
-	spawn_probability  = "0.6,0.7,0.8,0.8,0.8", -- BURST_4
+	spawn_level        = "2,3,4,5,6",           
+	spawn_probability  = "0.5,0.6,0.7,0.6,0.6",
 	price = 220,
 	mana = 9,
 	--max_uses = 100,
@@ -46,8 +46,8 @@ table.insert( actions,
     description        = "$actiondesc_array_4",
     sprite             = "mods/array_formations/files/array_4.png",
 	type 			   = ACTION_TYPE_DRAW_MANY,
-	spawn_level        = "3,4,5,6",         -- BURST_5?
-	spawn_probability  = "0.6,0.8,0.8,0.8", -- BURST_5?
+	spawn_level        = "3,4,5,6",        
+	spawn_probability  = "0.6,0.7,0.7,0.7",
 	price = 220,
 	mana = 12,
 	--max_uses = 100,
@@ -66,9 +66,9 @@ table.insert( actions,
 	spawn_requires_flag = "card_unlocked_musicbox",
 	type 			    = ACTION_TYPE_DRAW_MANY,
 	spawn_level         = "5,6,10", -- BURST_8
-	spawn_probability   = "0.1,0.1,0.5", -- BURST_8
+	spawn_probability   = "0.2,0.2,0.5", -- BURST_8
 	price = 400,
-	mana = 48,
+	mana = 32,
 	--max_uses = 100,
 	action = function()
 		c.spread_degrees = c.spread_degrees - 24.0
