@@ -42,6 +42,7 @@ function OnModPreInit()
 	
 	patchProblematicModifier("data/scripts/projectiles/orbit_projectile.lua")
 	patchProblematicModifier("data/scripts/projectiles/crumbling_earth_projectile.lua")
+	patchProblematicModifier("data/scripts/projectiles/clusterbomb_new.lua")
 
 end
 
